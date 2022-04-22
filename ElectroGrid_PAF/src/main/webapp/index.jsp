@@ -1,7 +1,23 @@
-<%
+<%@page import="customerSide.inquries"%>
+<% /*
 	if(session.getAttribute("name")==null){
 		response.sendRedirect("AdminLogin.jsp");
-	}
+	}*/
+%>
+
+<% 
+//Insert item---------------------------------
+if (request.getParameter("InqueryId") != null) 
+ { 
+	inquries inquiryAddObj = new inquries(); 
+ String stsMsg = inquiryAddObj.insertInquery(request.getParameter("Name"), 
+ request.getParameter("Email"), 
+ request.getParameter("Phone"), 
+ request.getParameter("Message")); 
+ session.setAttribute("statusMsg", stsMsg); 
+ } 
+//Delete item----------------------------------
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,13 +59,13 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item mx-0 mx-lg-1"><a
-						class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Portfolio</a></li>
+						class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Services</a></li>
 					<li class="nav-item mx-0 mx-lg-1"><a
-						class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li>
+						class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About Us</a></li>
 					<li class="nav-item mx-0 mx-lg-1"><a
-						class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contact</a></li>
-					<li class="nav-item mx-0 mx-lg-1"><a
-						class="nav-link py-3 px-0 px-lg-3 rounded" href="AdminLogout">Logout</a>
+						class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Inquires</a></li>
+					<li class="nav-item mx-0 mx-lg-1">	<a
+					class="nav-link py-3 px-0 px-lg-3 rounded" href="AdminLogout">Logout</a>
 						<li class="nav-item mx-0 mx-lg-1"><a
 						class="nav-link py-3 px-0 px-lg-3 rounded" href=""><%= session.getAttribute("name") %></a></li>
 					
@@ -58,11 +74,14 @@
 		</div>
 	</nav>
 	<!-- Masthead-->
-	<header class="masthead bg-primary text-white text-center" >
+	<header >
 		<div class="container d-flex align-items-center flex-column">
 			<!-- Masthead Avatar Image-->
 			<img class="masthead-avatar mb-5" src="assets/img/Norochcholai.png"
 				alt="..." />
+						</div>
+				
+				<div class="masthead bg-primary text-white text-center" >
 			<!-- Masthead Heading-->
 			<h1 class="masthead-heading text-uppercase mb-0">Welcome to ElectroGrid </h1>
 			<!-- Icon Divider-->
@@ -84,7 +103,7 @@
 		<div class="container">
 			<!-- Portfolio Section Heading-->
 			<h2
-				class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
+				class="page-section-heading text-center text-uppercase text-secondary mb-0">Services</h2>
 			<!-- Icon Divider-->
 			<div class="divider-custom">
 				<div class="divider-custom-line"></div>
@@ -106,7 +125,7 @@
 								<i class="fas fa-plus fa-3x"></i>
 							</div>
 						</div>
-						<img class="img-fluid" src="assets/img/portfolio/cabin.png"
+						<img class="img-fluid" src="assets/img/portfolio/Solar-Panel.jpg"
 							alt="..." />
 					</div>
 				</div>
@@ -205,10 +224,7 @@
 			<!-- About Section Content-->
 			<div class="row">
 				<div class="col-lg-4 ms-auto">
-					<p class="lead">Freelancer is a free bootstrap theme created by
-						Start Bootstrap. The download includes the complete source files
-						including HTML, CSS, and JavaScript as well as optional SASS
-						stylesheets for easy customization.</p>
+					<p class="lead">ElectroGrid is a corporate body established on 1st November 1969 under the Parliament Act No. 17 of 1969. It is empowered to generate, transmit and distribute electrical energy, to reach all categories of consumers and collect the revenue.</p>
 				</div>
 				<div class="col-lg-4 me-auto">
 					<p class="lead">You can create your own custom avatar for the
@@ -216,13 +232,7 @@
 						address to the contact form to make it fully functional!</p>
 				</div>
 			</div>
-			<!-- About Section Button-->
-			<div class="text-center mt-4">
-				<a class="btn btn-xl btn-outline-light"
-					href="https://startbootstrap.com/theme/freelancer/"> <i
-					class="fas fa-download me-2"></i> Free Download!
-				</a>
-			</div>
+			
 		</div>
 	</section>
 	<!-- Contact Section-->
@@ -230,8 +240,7 @@
 		<div class="container">
 			<!-- Contact Section Heading-->
 			<h2
-				class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact
-				Me</h2>
+				class="page-section-heading text-center text-uppercase text-secondary mb-0">Inquires</h2>
 			<!-- Icon Divider-->
 			<div class="divider-custom">
 				<div class="divider-custom-line"></div>
@@ -250,10 +259,10 @@
 					<!-- To make this form functional, sign up at-->
 					<!-- https://startbootstrap.com/solution/contact-forms-->
 					<!-- to get an API token!-->
-					<form id="contactForm" data-sb-form-api-token="API_TOKEN">
+					<form id="contactForm" data-sb-form-api-token="API_TOKEN" action="index.jsp" method="post">
 						<!-- Name input-->
 						<div class="form-floating mb-3">
-							<input class="form-control" id="name" type="text"
+							<input class="form-control" id="Name" type="text" name="Name"
 								placeholder="Enter your name..." data-sb-validations="required" />
 							<label for="name">Full name</label>
 							<div class="invalid-feedback" data-sb-feedback="name:required">A
@@ -261,7 +270,7 @@
 						</div>
 						<!-- Email address input-->
 						<div class="form-floating mb-3">
-							<input class="form-control" id="email" type="email"
+							<input class="form-control" id="Email" type="Email" name="Email"
 								placeholder="name@example.com"
 								data-sb-validations="required,email" /> <label for="email">Email
 								address</label>
@@ -272,7 +281,7 @@
 						</div>
 						<!-- Phone number input-->
 						<div class="form-floating mb-3">
-							<input class="form-control" id="phone" type="tel"
+							<input class="form-control" id="Phone" type="tel" name="Phone"
 								placeholder="(123) 456-7890" data-sb-validations="required" />
 							<label for="phone">Phone number</label>
 							<div class="invalid-feedback" data-sb-feedback="phone:required">A
@@ -280,36 +289,20 @@
 						</div>
 						<!-- Message input-->
 						<div class="form-floating mb-3">
-							<textarea class="form-control" id="message" type="text"
+							<textarea class="form-control" id="Message" type="text" name="Message"
 								placeholder="Enter your message here..." style="height: 10rem"
 								data-sb-validations="required"></textarea>
 							<label for="message">Message</label>
 							<div class="invalid-feedback" data-sb-feedback="message:required">A
 								message is required.</div>
 						</div>
-						<!-- Submit success message-->
-						<!---->
-						<!-- This is what your users will see when the form-->
-						<!-- has successfully submitted-->
-						<div class="d-none" id="submitSuccessMessage">
-							<div class="text-center mb-3">
-								<div class="fw-bolder">Form submission successful!</div>
-								To activate this form, sign up at <br /> <a
-									href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-							</div>
-						</div>
-						<!-- Submit error message-->
-						<!---->
-						<!-- This is what your users will see when there is-->
-						<!-- an error submitting the form-->
-						<div class="d-none" id="submitErrorMessage">
-							<div class="text-center text-danger mb-3">Error sending
-								message!</div>
-						</div>
 						<!-- Submit Button-->
-						<button class="btn btn-primary btn-xl disabled" id="submitButton"
-							type="submit">Send</button>
+						<input name="btnSubmit" type="submit" value="Save" class="btn btn-primary"> 
+
 					</form>
+					<div class="alert alert-success">
+					 	<% out.print(session.getAttribute("statusMsg"));%>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -320,9 +313,9 @@
 			<div class="row">
 				<!-- Footer Location-->
 				<div class="col-lg-4 mb-5 mb-lg-0">
-					<h4 class="text-uppercase mb-4">Location</h4>
+					<h4 class="text-uppercase mb-4">Head Office</h4>
 					<p class="lead mb-0">
-						2334 <br /> Malabe, Colombo
+						50 Sir Chittampalam A Gardiner Mawatha Colombo 00200, 00700
 					</p>
 				</div>
 				<!-- Footer Social Icons-->
@@ -339,10 +332,9 @@
 				</div>
 				<!-- Footer About Text-->
 				<div class="col-lg-4">
-					<h4 class="text-uppercase mb-4">About Freelancer</h4>
+					<h4 class="text-uppercase mb-4">KNOWLEDGE HUB</h4>
 					<p class="lead mb-0">
-						Freelance is a free to use, MIT licensed Bootstrap theme created
-						by <a href="http://startbootstrap.com">Start Bootstrap</a> .
+						Visit Our Official Facebook page for more Details .
 					</p>
 				</div>
 			</div>
@@ -351,18 +343,18 @@
 	<!-- Copyright Section-->
 	<div class="copyright py-4 text-center text-white">
 		<div class="container">
-			<small>Copyright &copy; Your Website 2021</small>
+			<small>Copyright @ 2022 ElectroGrid</small>
 		</div>
 	</div>
 	<!-- Portfolio Modals-->
 	<!-- Portfolio Modal 1-->
 	<div class="portfolio-modal modal fade" id="portfolioModal1"
-		tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
+		tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true" >
 		<div class="modal-dialog modal-xl">
-			<div class="modal-content">
+			<div class="modal-content" >
 				<div class="modal-header border-0">
 					<button class="btn-close" type="button" data-bs-dismiss="modal"
-						aria-label="Close"></button>
+						aria-label="Close" ></button>
 				</div>
 				<div class="modal-body text-center pb-5">
 					<div class="container">
@@ -370,8 +362,8 @@
 							<div class="col-lg-8">
 								<!-- Portfolio Modal - Title-->
 								<h2
-									class="portfolio-modal-title text-secondary text-uppercase mb-0">Log
-									Cabin</h2>
+									class="portfolio-modal-title text-secondary text-uppercase mb-0">
+apply rooftop solar pv clearance online</h2>
 								<!-- Icon Divider-->
 								<div class="divider-custom">
 									<div class="divider-custom-line"></div>
@@ -382,16 +374,16 @@
 								</div>
 								<!-- Portfolio Modal - Image-->
 								<img class="img-fluid rounded mb-5"
-									src="assets/img/portfolio/cabin.png" alt="..." />
+									src="assets/img/portfolio/solar-panel-model.jpg" alt="..." />
 								<!-- Portfolio Modal - Text-->
 								<p class="mb-4">Lorem ipsum dolor sit amet, consectetur
 									adipisicing elit. Mollitia neque assumenda ipsam nihil,
 									molestias magnam, recusandae quos quis inventore quisquam velit
 									asperiores, vitae? Reprehenderit soluta, eos quod consequuntur
 									itaque. Nam.</p>
-								<button class="btn btn-primary" href="#!"
+								<button class="btn btn-primary" href="solarPanel.jsp"
 									data-bs-dismiss="modal">
-									<i class="fas fa-times fa-fw"></i> Close Window
+									<i class="fas fa-times fa-fw"></i> Add Details
 								</button>
 							</div>
 						</div>
@@ -628,10 +620,7 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
 	<script src="js/scripts.js"></script>
-	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-	<!-- * *                               SB Forms JS                               * *-->
-	<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+
 	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>

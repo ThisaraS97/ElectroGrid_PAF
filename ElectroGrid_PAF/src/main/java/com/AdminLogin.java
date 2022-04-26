@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/AdminLogin1")
+@WebServlet("/AdminLogin")
 public class AdminLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
@@ -30,12 +30,12 @@ public class AdminLogin extends HttpServlet {
 		
 		if(uemail == null || uemail.equals("")) {
 			request.setAttribute("status", "invalidEmail");
-			dispatcher = request.getRequestDispatcher("AdminLogin1.jsp");
+			dispatcher = request.getRequestDispatcher("AdminLogin.jsp");
 			dispatcher.forward(request, response);
 		}
 		if(upwd == null || upwd.equals("")){
 			request.setAttribute("status", "invaildPassword");
-			dispatcher = request.getRequestDispatcher("AdminLogin1.jsp");
+			dispatcher = request.getRequestDispatcher("AdminLogin.jsp");
 			dispatcher.forward(request, response);
 		}
 		

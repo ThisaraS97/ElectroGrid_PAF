@@ -1,21 +1,12 @@
-<%@page import="customerSide.inquries"%>
 <% /*
 	if(session.getAttribute("name")==null){
-		response.sendRedirect("AdminLogin.jsp");
+		response.sendRedirect("CustomerLogin.jsp");
 	}*/
 %>
 
 <% 
 //Insert item---------------------------------
-if (request.getParameter("InqueryId") != null) 
- { 
-	inquries inquiryAddObj = new inquries(); 
- String stsMsg = inquiryAddObj.insertInquery(request.getParameter("Name"), 
- request.getParameter("Email"), 
- request.getParameter("Phone"), 
- request.getParameter("Message")); 
- session.setAttribute("statusMsg", stsMsg); 
- } 
+
 //Delete item----------------------------------
 
 %>
@@ -27,7 +18,7 @@ if (request.getParameter("InqueryId") != null)
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>ElectroGrid Admin Section</title>
+<title>ElectroGrid</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Font Awesome icons (free version)-->
@@ -58,6 +49,10 @@ if (request.getParameter("InqueryId") != null)
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ms-auto">
+				<li class="nav-item mx-0 mx-lg-1"><a
+					class="nav-link py-3 px-0 px-lg-3 rounded" href="index.jsp">Home</a></li>
+				<li class="nav-item mx-0 mx-lg-1"><a
+					class="nav-link py-3 px-0 px-lg-3 rounded" href="payments.jsp">Payments</a></li>
 					<li class="nav-item mx-0 mx-lg-1"><a
 						class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Services</a></li>
 					<li class="nav-item mx-0 mx-lg-1"><a

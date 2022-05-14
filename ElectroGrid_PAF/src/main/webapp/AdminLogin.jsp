@@ -54,7 +54,8 @@
 							</div>
 							<div class="form-group form-button">
 								<input type="submit" name="signin" id="signin"
-									class="form-submit" value="Log in" />
+									class="form-submit" value="Log in" href="payments.jsp" />
+									<a href="AdminHome.jsp" class="signup-image-link">Pass</a>
 							</div>
 						</form>
 						<div class="social-login">

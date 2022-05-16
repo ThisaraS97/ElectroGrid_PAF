@@ -14,12 +14,12 @@ if (status != true)
  return; 
  } 
 // If valid------------------------
-var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT"; 
+var type = ($("#hidCusIDSave").val() == "") ? "POST" : "PUT"; 
  $.ajax( 
  { 
  url : "CustomerAPI", 
  type : type, 
- data : $("#formItem").serialize(), 
+ data : $("#formCustomer").serialize(), 
  dataType : "text", 
  complete : function(response, status) 
  { 
